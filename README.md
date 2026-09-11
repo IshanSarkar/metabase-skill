@@ -19,13 +19,13 @@ SQL dropdown that lists product categories.
 ### pip (no Node.js)
 
 ```bash
-pip install "git+https://github.com/IshanSarkar/metabase-skill.git"
+pip install metabase-skill
 metabase-skill
 ```
 
-After the package is on PyPI, that becomes `pip install metabase-skill` then `metabase-skill`. Same flags as the Python installer (`--project`, `--agent cursor`). `python -m metabase_skill` is equivalent.
+Same flags as the Python installer (`--project`, `--agent cursor`). `python -m metabase_skill` is equivalent.
 
-Windows: `py -m pip install ...` then `metabase-skill` (or `py -m metabase_skill`).
+Windows: `py -m pip install metabase-skill` then `metabase-skill` (or `py -m metabase_skill`).
 
 ### Clone + Python installer
 
