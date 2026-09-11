@@ -1,0 +1,259 @@
+{
+  "intents": [
+    {
+      "id": "isolate-tenant-data",
+      "phrases": [
+        "only their own", "only see their", "hide rows", "hide customer",
+        "each customer", "each tenant", "each client", "per customer",
+        "per tenant", "multi tenant", "multi-tenant", "multitenant",
+        "sandbox", "sandboxed", "row level", "row-level", "rls",
+        "column security", "restrict rows", "filter by user",
+        "customers must not see", "don't show other", "isolate data",
+        "data isolation", "segregate", "tenant isolation",
+        "who can see what", "people should not see"
+      ],
+      "concepts": [
+        "data-isolation-methods", "row-and-column-security",
+        "impersonation", "database-routing", "tenants", "user-attributes"
+      ],
+      "related_concepts": ["locked-parameters", "guest-embedding"],
+      "topics": ["permissions", "people"]
+    },
+    {
+      "id": "embed-in-app",
+      "phrases": [
+        "embed",         "iframe", "in our app", "in my app", "white label",
+        "whitelabel", "react sdk", "react app", "inside the product", "customer portal",
+        "signed embed", "static embed", "guest embed", "modular embed",
+        "full app embed", "hide metabase ui", "chart in website",
+        "without login", "without logging", "no login", "don't log in",
+        "not log in", "without an account", "no metabase account"
+      ],
+      "concepts": ["modular-embedding", "guest-embedding"],
+      "related_concepts": [
+        "full-app-embedding", "public-links", "tenants",
+        "securing-embeds", "sdk"
+      ],
+      "topics": ["embedding"]
+    },
+    {
+      "id": "sql-filters",
+      "phrases": [
+        "sql parameter", "sql variable", "mustache", "{{",
+        "field filter", "dropdown in sql", "sql dropdown",
+        "smart filter", "optional clause", "sql template", "native query filter",
+        "pass filter into sql", "dashboard filter sql"
+      ],
+      "concepts": ["sql-parameters", "field-filters", "filter-widgets"],
+      "related_concepts": [
+        "optional-variables", "basic-sql-parameters", "dashboard-filters", "snippets"
+      ],
+      "topics": ["questions", "dashboards"]
+    },
+    {
+      "id": "install-ops",
+      "phrases": [
+        "docker", "jar file", "install metabase", "application database",
+        "app db", "h2", "migrate production", "backup metabase",
+        "upgrade metabase", "java version", "environment variable",
+        "self host", "self-host", "port 3000"
+      ],
+      "concepts": [
+        "installing-metabase", "running-metabase-on-docker",
+        "configuring-application-database", "migrating-from-h2",
+        "upgrading-metabase", "environment-variables"
+      ],
+      "topics": ["install", "cloud", "config"]
+    },
+    {
+      "id": "auth-sso",
+      "phrases": [
+        "saml", "jwt login", "oidc", "sso", "single sign",
+        "can't log in", "login with company"
+      ],
+      "concepts": [
+        "authenticating-with-saml", "authenticating-with-jwt",
+        "authenticating-with-oidc"
+      ],
+      "related_concepts": [
+        "google-sign-in", "ldap", "user-provisioning",
+        "two-factor-authentication"
+      ],
+      "topics": ["people"]
+    },
+    {
+      "id": "performance",
+      "phrases": [
+        "slow", "timeout", "too long", "cache", "speed up",
+        "dashboard is slow", "query takes forever", "performance",
+        "take forever", "takes forever", "forever to load", "loading slowly"
+      ],
+      "concepts": ["my-dashboard-is-slow", "caching", "db-performance"],
+      "related_concepts": ["model-persistence", "transforms-overview", "sync-scan"],
+      "topics": ["troubleshooting", "config"]
+    },
+    {
+      "id": "ai",
+      "phrases": [
+        "metabot", "chat with data", "natural language", "ask in english",
+        "generate sql", "mcp server", "agent api", "claude", "openai"
+      ],
+      "concepts": ["metabot", "mcp", "agent-api", "providers"],
+      "related_concepts": ["privacy"],
+      "topics": ["ai"]
+    },
+    {
+      "id": "share-notify",
+      "phrases": [
+        "email dashboard", "slack", "subscription", "alert me",
+        "send report", "webhook", "notify when"
+      ],
+      "concepts": ["subscriptions", "alerts", "email", "slack", "webhooks"],
+      "topics": ["dashboards", "questions", "config"]
+    },
+    {
+      "id": "semantic-layer",
+      "phrases": [
+        "semantic layer", "official metric", "reuse calculation",
+        "trusted table", "transform", "dbt-like", "model vs metric",
+        "library", "data studio", "curate data"
+      ],
+      "concepts": [
+        "models", "metrics", "transforms-overview", "library",
+        "measures", "segments"
+      ],
+      "topics": ["modeling", "questions"]
+    }
+  ],
+  "aliases": {
+    "sandbox": ["row-and-column-security", "data-isolation-methods"],
+    "sandboxes": ["row-and-column-security"],
+    "sandboxing": ["row-and-column-security"],
+    "data sandbox": ["row-and-column-security"],
+    "rls": ["row-and-column-security"],
+    "row level security": ["row-and-column-security"],
+    "row-level security": ["row-and-column-security"],
+    "gtm": ["row-and-column-security"],
+    "impersonate": ["impersonation"],
+    "database role": ["impersonation"],
+    "route to another database": ["database-routing"],
+    "separate database per customer": ["database-routing", "tenants"],
+    "locked filter": ["locked-parameters", "guest-embedding", "static-embedding-parameters"],
+    "locked parameter": ["locked-parameters", "static-embedding-parameters"],
+    "signed embed": ["guest-embedding", "static-embedding"],
+    "signed embedding": ["guest-embedding", "static-embedding"],
+    "static embed": ["static-embedding", "guest-embedding"],
+    "interactive embed": ["modular-embedding", "full-app-embedding"],
+    "full app": ["full-app-embedding"],
+    "sdk": ["sdk", "modular-embedding"],
+    "react component": ["sdk", "modular-embedding"],
+    "public link": ["public-links"],
+    "share without login": ["public-links", "guest-embedding"],
+    "without login": ["guest-embedding", "public-links"],
+    "no account": ["guest-embedding", "public-links"],
+    "no metabase account": ["guest-embedding", "public-links"],
+    "dropdown": ["field-filters", "filter-widgets", "dashboard-filters"],
+    "react": ["sdk", "modular-embedding"],
+    "react app": ["sdk", "modular-embedding"],
+    "field filter": ["field-filters", "sql-parameters"],
+    "sql snippet": ["snippets"],
+    "saved question in sql": ["referencing-saved-questions-in-queries"],
+    "mustache": ["sql-parameters"],
+    "optional sql": ["optional-variables"],
+    "app db": ["configuring-application-database"],
+    "application database": ["configuring-application-database"],
+    "h2": ["migrating-from-h2", "configuring-application-database"],
+    "sample database": ["connecting"],
+    "xray": ["x-rays"],
+    "x-ray": ["x-rays"],
+    "metabot": ["metabot", "ai"],
+    "all users": ["collections", "data", "introduction"],
+    "most permissive": ["introduction"],
+    "drill through": ["drill-through", "interactive"],
+    "click behavior": ["interactive"],
+    "write back": ["actions", "custom"],
+    "crud": ["actions", "basic"],
+    "okta": ["saml-okta", "authenticating-with-saml"],
+    "auth0": ["saml-auth0"],
+    "entra": ["saml-azure"],
+    "azure ad": ["saml-azure"],
+    "keycloak": ["saml-keycloak", "oidc-keycloak"],
+    "scim": ["user-provisioning"],
+    "api key": ["api-keys"],
+    "env var": ["environment-variables"],
+    "mb_": ["environment-variables"],
+    "jetty": ["customizing-jetty-webserver"],
+    "prometheus": ["observability-with-prometheus"],
+    "serialization": ["serialization"],
+    "remote sync": ["remote-sync"],
+    "csv upload": ["uploads"],
+    "json unfold": ["json-unfolding"]
+  },
+  "topics": {
+    "install": {
+      "dirs": ["installation-and-operation"],
+      "hubs": ["installation-and-operation/start.md", "installation-and-operation/installing-metabase.md"],
+      "related": ["cloud", "config", "troubleshooting"]
+    },
+    "cloud": {
+      "dirs": ["cloud"],
+      "hubs": ["cloud/start.md", "cloud/cloud-vs-self-hosting.md"],
+      "related": ["install", "config"]
+    },
+    "config": {
+      "dirs": ["configuring-metabase"],
+      "hubs": ["configuring-metabase/start.md"],
+      "related": ["install", "cloud"]
+    },
+    "databases": {
+      "dirs": ["databases"],
+      "hubs": ["databases/start.md", "databases/connecting.md"],
+      "related": ["troubleshooting", "install"]
+    },
+    "questions": {
+      "dirs": ["questions"],
+      "hubs": ["questions/start.md", "questions/introduction.md"],
+      "related": ["dashboards", "modeling", "troubleshooting"]
+    },
+    "dashboards": {
+      "dirs": ["dashboards", "documents", "actions", "exploration-and-organization"],
+      "hubs": ["dashboards/start.md", "dashboards/introduction.md"],
+      "related": ["questions", "permissions"]
+    },
+    "modeling": {
+      "dirs": ["data-modeling", "data-studio"],
+      "hubs": ["data-modeling/start.md", "data-studio/overview.md"],
+      "related": ["questions", "databases"]
+    },
+    "people": {
+      "dirs": ["people-and-groups"],
+      "hubs": ["people-and-groups/start.md"],
+      "related": ["permissions", "embedding"]
+    },
+    "permissions": {
+      "dirs": ["permissions"],
+      "hubs": ["permissions/start.md", "permissions/introduction.md", "permissions/data-isolation-methods.md"],
+      "related": ["people", "embedding", "troubleshooting"]
+    },
+    "embedding": {
+      "dirs": ["embedding"],
+      "hubs": ["embedding/start.md", "embedding/introduction.md"],
+      "related": ["permissions", "people", "ai"]
+    },
+    "ai": {
+      "dirs": ["ai"],
+      "hubs": ["ai/start.md", "ai/overview.md"],
+      "related": ["embedding", "people"]
+    },
+    "troubleshooting": {
+      "dirs": ["troubleshooting-guide"],
+      "hubs": ["troubleshooting-guide/index.md"],
+      "related": ["databases", "permissions", "install"]
+    }
+  },
+  "skip_path_parts": [
+    "sdk/api/snippets",
+    "eajs/snippets",
+    "/images/"
+  ]
+}

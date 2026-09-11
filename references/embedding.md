@@ -1,0 +1,173 @@
+# Metabase Embedding Reference
+
+Official docs: https://www.metabase.com/docs/latest/embedding/introduction
+
+## Embedding modes (pick one architecture)
+
+| Mode | What it embeds | Auth | Plans |
+|------|----------------|------|-------|
+| **Modular** | Individual components (dashboard, question, query builder, AI chat, collection browser) | SSO or Guest | Guest: all plans; SSO: Pro/Enterprise |
+| **Full app** | Entire Metabase UI in iframe | SSO (JWT recommended, SAML supported) | Pro/Enterprise only |
+| **Public links/embeds** | View-only question/dashboard/document via URL or iframe | None | All plans (admin-only to create) |
+
+**Static/signed embedding** is legacy; use **Guest embedding** instead (same JWT model, web components).
+
+Modular is the default recommendation over full app (more customizable, component-level control).
+
+## Authentication (orthogonal to mode)
+
+Authentication is a per-page setting, not a separate embedding type. **One auth method per page** — cannot mix SSO and guest on the same page.
+
+### SSO (Pro/Enterprise)
+
+- Each viewer needs their **own Metabase account** (shared accounts = security risk + unfair usage).
+- Metabase knows identity → permissions, row/column security, drill-through, query builder, AI chat, tenants, custom viz, usage analytics, plugins.
+- Auth via **JWT** or **SAML**; modular SDK also supports API keys for **local dev only**.
+- JWT endpoint must return `{ jwt: "..." }` for SDK requests (`?response=json`); full app uses redirect to `/auth/sso`.
+- Modular SSO: `defineMetabaseAuthConfig()` / `MetabaseProvider`; JWT Identity Provider URI set in Admin > Authentication > JWT.
+- Cross-domain: add origins to CORS (Admin > Embedding); set SameSite cookie to `None` (requires HTTPS; breaks Safari/iOS).
+
+Docs: https://www.metabase.com/docs/latest/embedding/authentication
+
+### Guest (all plans including OSS)
+
+- **View-only** charts/dashboards; no Metabase session per viewer.
+- Secured by **JWT signed with embedding secret key** (shared across all guest embeds).
+- Server signs payload: `{ resource: { dashboard: id } | { question: id }, params: {...}, exp: ... }`.
+- Client loads `/app/embed.js`, sets `window.metabaseConfig = { isGuest: true, instanceUrl, ... }`.
+- Components: `<metabase-dashboard token="...">`, `<metabase-question token="...">`.
+- Never paste static JWTs in HTML — sign per page load or use `guestEmbedProviderUri` for refresh/init.
+- OSS/Starter show "Powered by Metabase" banner; Pro/Enterprise can remove.
+- Settings: OSS at Admin > Embedding; paid at Admin > Embedding > Guest embeds.
+
+Docs: https://www.metabase.com/docs/latest/embedding/guest-embedding
+
+### SSO vs Guest feature matrix
+
+| Feature | SSO | Guest |
+|---------|-----|-------|
+| Charts, dashboards, filter widgets, export | ✅ | ✅ |
+| Basic appearance (light/dark) | ✅ | ✅ |
+| Advanced theming, plugins, custom viz | ✅ | ❌ |
+| Drill-through, query builder, SQL editor, AI chat, collection browser | ✅ | ❌ |
+| Row/column security, database routing, permissions | ✅ | ❌ |
+| Locked parameters | ❌ (use permissions) | ✅ |
+| Disable downloads | Pro/Enterprise | Pro/Enterprise |
+
+## Locked parameters (Guest only)
+
+Row-level restriction without Metabase accounts. Parameter set to **Locked** in embed wizard; value passed in JWT `params` object (not visible to user).
+
+Rules:
+- Once published with locked param, **must** include it in every JWT or Metabase rejects (`You must specify a value for :<name> in the JWT`).
+- Pass `[]` to bypass a locked filter for a token.
+- Multiple locked params combine with **AND**.
+- Locked params on dashboards with SQL questions: **single value only** per locked param.
+- Locked params limit editable filter dropdown values (acts like linked filters).
+- Can power custom filter widgets in your app — re-sign JWT on change, swap `token` attribute.
+
+Parameter visibility: Disabled (hidden, default) | Editable | Locked.
+
+Docs: https://www.metabase.com/docs/latest/embedding/guest-embedding#locked-parameters
+
+## Modular implementation: Web components vs React SDK
+
+| | Web components | React SDK |
+|---|----------------|-------------|
+| Setup | `<script defer src="{instance}/app/embed.js">` + `defineMetabaseConfig()` + HTML tags | `npm install @metabase/embedding-sdk-react@{major}-stable` |
+| Framework | Any (HTML, Vue, Svelte, Rails, React) | React 18/19, Node 20+ |
+| When to use | Default; no build step | Custom layouts, plugins, actions, custom question layouts, loading/error states |
+| Enable | Admin > Embedding > Enable modular embedding | Also toggle Modular embedding SDK + CORS origins |
+
+**SDK architecture (v57+):** npm package bootstraps; full SDK bundle served from Metabase instance (version sync). Metabase ≥1.52; SDK major must match Metabase major on ≤56.
+
+**SDK-only features:** plugins (`handleLink`, etc.), `useAction`, custom `InteractiveQuestion` layouts, custom loading/error states.
+
+**SDK API reference:** Large autogenerated snippet dump under `embedding/sdk/api/snippets/` — use for prop/type lookup; not summarized here.
+
+Components: `<metabase-dashboard>`, `<metabase-question>`, `<metabase-browser>`, `<metabase-metabot>`, query builder embeds.
+
+Docs: https://www.metabase.com/docs/latest/embedding/modular-embedding, https://www.metabase.com/docs/latest/embedding/sdk/introduction
+
+## Parameters (modular)
+
+- **Uncontrolled:** `initial-parameters` / `initialParameters` — set once on load.
+- **Controlled:** `parameters` + `onParametersChange` (SDK) or JS property assignment (web components).
+- SQL questions: `initial-sql-parameters` / `sqlParameters` (SQL only, not query builder).
+- SSO embeds: use data permissions instead of locked params for app-controlled filtering.
+- Pro/Enterprise: entity IDs (stable across serialization) instead of sequential IDs.
+
+Docs: https://www.metabase.com/docs/latest/embedding/parameters
+
+## Full app embedding
+
+- iframe `src` → Metabase URL or auth endpoint (`/auth/sso?return_to=...`).
+- Prefer entity ID URLs: `/dashboard/entity/{id}`, `/question/entity/{id}`, `/collection/entity/{id}`.
+- postMessage API for location/frame sync between parent and iframe.
+- UI component visibility via URL params (see full-app-ui-components).
+- Session cookies for auth; `MAX_SESSION_AGE`, `MB_SESSION_COOKIES` env vars; logout via `/auth/logout`.
+- Same TLD recommended; cross-domain needs SameSite=None.
+
+Docs: https://www.metabase.com/docs/latest/embedding/full-app-embedding
+
+## Public links and embeds
+
+- Admin-only creation; no authentication.
+- Anyone with URL sees data; query/hash params for appearance/filters are **not secure** (removable from URL).
+- Custom visualizations fall back to default.
+- Documents support public links; modular embeds do **not** support documents (public documents only).
+- Disable: Admin > Settings > Public sharing.
+
+Docs: https://www.metabase.com/docs/latest/embedding/public-links
+
+## Tenants (Pro/Enterprise, multi-tenant SaaS)
+
+Enable: Admin > People > gear > Multi-tenant strategy.
+
+Concepts:
+- **Tenant users** (end users, isolated) vs **internal users** (builders/admins).
+- **Shared collections** — same dashboards for all tenants; data isolation via permissions.
+- **Tenant collections** — per-tenant; tenant users always have Curate.
+- **Tenant groups** — shared across tenants (e.g., "Recruiters" / "Hiring managers").
+- **All tenant users** group — configure default permissions; permissions are additive (most permissive wins).
+
+JWT provisioning: `@tenant` claim (slug) required for tenant users; `@tenant.attributes` for tenant-level attributes; auto-provision with JWT user provisioning enabled.
+
+Data isolation: row/column security, impersonation, or database routing using `@tenant.slug` attribute.
+
+Docs: https://www.metabase.com/docs/latest/embedding/tenants
+
+## Security summary
+
+| Method | Auth | AuthZ | Data isolation |
+|--------|------|-------|----------------|
+| Public | None | None | None — URL is the secret |
+| Guest JWT | Signed resource + params | Locked params only (row-level filters) | Server-side JWT signing |
+| SSO | JWT/SAML session | Full Metabase permissions + RLS | IdP attributes → groups/RLS |
+
+Securing embeds: https://www.metabase.com/docs/latest/embedding/securing-embeds
+
+## Limitations
+
+- **Documents** cannot be modular-embedded (public links only).
+- **Custom visualizations:** SSO modular only, via `allowedCustomVisualizations: ["custom:Name"]` allowlist + CSP; guest/public fall back to default.
+- Guest: no drill-through, query builder, AI chat, RLS, database routing, usage analytics, custom viz.
+- Guest dashboard custom destinations: URL type only; external URLs open new tab.
+- Full app: less granular than modular; Safari requires same TLD for iOS browsers.
+- Embedding telemetry collected (see information-collection docs); Usage Analytics tracks embed usage (Pro/Enterprise).
+
+## Setup checklist (modular SSO)
+
+1. Admin > Embedding → Enable modular embedding (+ SDK if React).
+2. Add CORS origins.
+3. Admin > Authentication → configure JWT or SAML.
+4. Backend: JWT signing endpoint returning `{ jwt }`.
+5. Frontend: `defineMetabaseConfig({ instanceUrl, fetchRequestToken, theme })` or SDK `MetabaseProvider`.
+6. Share > Embed wizard per entity; assign permissions per user/group/tenant.
+
+## Key URLs
+
+- Introduction: https://www.metabase.com/docs/latest/embedding/introduction
+- Components map: https://www.metabase.com/docs/latest/embedding/components
+- Appearance/theming: https://www.metabase.com/docs/latest/embedding/appearance
+- Permissions for embedding: https://www.metabase.com/docs/latest/permissions/embedding
