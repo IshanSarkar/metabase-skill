@@ -1,8 +1,10 @@
 # Metabase skill for any AI agent
 
-An [Agent Skill](https://agentskills.io/specification) that answers Metabase questions from a local copy of the official docs, with a lookup script so the agent does not dump the entire handbook into context.
+An [Agent Skill](https://agentskills.io/specification) that answers Metabase questions from a local copy of the official Metabase docs. Author: Ishan Sarkar. Implementation: Cursor AI agent. Attribution: [CREDITS.md](CREDITS.md).
 
-Works with **Cursor, Claude Code, Codex, GitHub Copilot, Gemini CLI, OpenCode**, and other clients that load `SKILL.md`.
+**OS:** macOS, Linux, Windows. The skill is files + Python stdlib — no Docker, no native binaries.
+
+**Agents:** Cursor, Claude Code, Codex, GitHub Copilot, Gemini CLI, OpenCode, and any client that loads `SKILL.md`.
 
 After install, start a new chat and ask in plain language. You do not need a slash command.
 
@@ -14,56 +16,67 @@ SQL dropdown that lists product categories.
 
 ## Install (pick one)
 
-### Anyone, any agent — Skills CLI
+### Anyone, any OS, any agent — Skills CLI
+
+Needs [Node.js](https://nodejs.org/). Same command on macOS, Linux, and Windows:
 
 ```bash
-npx skills add <GITHUB_OWNER>/<REPO> -g -y
+npx skills add IshanSarkar/metabase-skill -g -y
 ```
 
-That copies the skill into each selected agent's user-level skills folder. Add `-a cursor -a claude-code -a codex` to target specific products.
+Add `-a cursor -a claude-code -a codex` to target specific products.
 
-Until the repo is on GitHub, install from a local clone:
+From a local clone:
 
 ```bash
-git clone <this-repo-url> metabase-skill
-cd metabase-skill
 npx skills add . -g -y
-# or
-./install.sh
 ```
 
-### Cursor (user-wide)
+### Python installer (no Node)
+
+Needs Python 3.9+. Same on every OS:
 
 ```bash
-git clone <this-repo-url> ~/.cursor/skills/metabase
+# macOS / Linux
+python3 scripts/install.py
+
+# Windows (PowerShell or cmd)
+py -3 scripts\install.py
 ```
 
-Restart Cursor or start a new Agent chat.
+Flags: `--project` (current repo only), `--agent cursor` (one product).
 
-### Claude Code
+Unix shortcut: `./install.sh` (calls the same Python installer).
+
+### Cursor only — clone into the skills folder
+
+| OS | Folder |
+|----|--------|
+| macOS / Linux | `~/.cursor/skills/metabase` |
+| Windows | `%USERPROFILE%\.cursor\skills\metabase` |
 
 ```bash
-git clone <this-repo-url> ~/.claude/skills/metabase
+git clone https://github.com/IshanSarkar/metabase-skill.git ~/.cursor/skills/metabase
 ```
 
-### Codex
+Windows PowerShell:
 
-```bash
-git clone <this-repo-url> ~/.codex/skills/metabase
+```powershell
+git clone https://github.com/IshanSarkar/metabase-skill.git "$env:USERPROFILE\.cursor\skills\metabase"
 ```
 
-### This project only
-
-```bash
-./install.sh --project
-```
-
-Puts the skill in `.cursor/skills/metabase` and `.agents/skills/metabase` so teammates get it with the repo.
+Then start a **new** Agent chat.
 
 ## Requirements
 
-- Python 3.9+ (standard library only) for `scripts/lookup.py`
-- Optional: `git` if `source/` is missing (first lookup clones Metabase `docs/`)
+- **Python 3.9+** for lookup (standard library only: `pathlib`, `json`, `re`)
+- Optional: **git** if `source/` is missing (first lookup clones Metabase `docs/`)
+- Optional: **Node.js** only if you install via `npx skills add`
+
+| OS | Python command |
+|----|----------------|
+| macOS / Linux | `python3` |
+| Windows | `py -3` or `python` |
 
 ## How to use it in conversation
 
@@ -76,15 +89,27 @@ The agent should run `scripts/lookup.py`, read the few PRIMARY pages, and answer
 ## Layout
 
 ```
-SKILL.md                 # router (small — always loaded when the skill fires)
+SKILL.md                 # router (small — loaded when the skill fires)
 scripts/lookup.py        # run this; do not paste it into context
+scripts/install.py       # cross-platform installer
 graph/concepts.json      # slang → official Metabase concepts
 source/                  # official docs snapshot
 references/              # short topic cheat sheets
-install.sh               # copy into local agent skill folders
+install.sh               # Unix wrapper around scripts/install.py
 ```
+
+## Credits
+
+See [CREDITS.md](CREDITS.md).
+
+- **Documentation source:** [Metabase documentation](https://www.metabase.com/docs/latest/) and the `docs/` folder of [metabase/metabase](https://github.com/metabase/metabase)
+- **Docs snapshot:** 2026-09-10; latest Metabase at that time: **63.17** (`v0.63.17` OSS, `v1.63.17` Pro/Enterprise)
+- **Author:** Ishan Sarkar
+- **Implementation:** Cursor AI agent
+
+This skill is not affiliated with or endorsed by Metabase, Inc.
 
 ## License
 
-Skill packaging: MIT (`LICENSE`).  
+Skill packaging: MIT (`LICENSE`), Copyright © 2026 Ishan Sarkar.  
 `source/` is Metabase documentation (AGPL); see `NOTICE.md`.

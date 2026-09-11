@@ -8,17 +8,21 @@ description: >-
   Metabase embedding, guest/static embeds, row-level security in Metabase, or
   Metabase Cloud vs self-hosting.
 license: MIT
-compatibility: Requires Python 3.9+ (stdlib only). Works with any Agent Skills client (Cursor, Claude Code, Codex, Copilot, Gemini CLI, OpenCode, and others).
+compatibility: Requires Python 3.9+ (stdlib only). macOS, Linux, and Windows. Works with any Agent Skills client (Cursor, Claude Code, Codex, Copilot, Gemini CLI, OpenCode, and others).
 metadata:
   version: "1.0.0"
   docs_snapshot: "2026-09-10"
+  docs_metabase_version: "63.17"
+  author: Ishan Sarkar
+  implemented_by: Cursor AI agent
+  docs_source: https://www.metabase.com/docs/latest/
 ---
 
 # Metabase Knowledge Base
 
 This skill's root is the directory that contains this `SKILL.md` file.
-Official docs snapshot: `source/` (fetched on first lookup if missing).
-Live docs: https://www.metabase.com/docs/latest/
+Docs referred from: https://www.metabase.com/docs/latest/ (snapshot in `source/`, Metabase 63.17 as of 2026-09-10).
+Authorship: [CREDITS.md](CREDITS.md) — Ishan Sarkar; Cursor AI agent.
 
 ## Mandatory retrieval (do not skip)
 
@@ -30,7 +34,7 @@ From **this skill root** (the folder that contains `SKILL.md`), **run** — do n
 python3 scripts/lookup.py "PASTE THE USER QUESTION"
 ```
 
-If the current working directory is not the skill root, invoke the script by the path next to this file (`scripts/lookup.py`).
+On Windows, if `python3` is missing, use `python` or `py -3`. If the current working directory is not the skill root, invoke `scripts/lookup.py` next to this file.
 
 Then:
 

@@ -1,8 +1,17 @@
 # Notices
 
-## This skill (MIT)
+## Credits
 
-`SKILL.md`, `scripts/`, `graph/concepts.json`, `references/`, `install.sh`, and `README.md` are original packaging for Agent Skills and are licensed under MIT (see `LICENSE`).
+See [CREDITS.md](CREDITS.md) for documentation source and authorship.
+
+- **Author:** Ishan Sarkar
+- **Implementation:** Cursor AI agent
+- **Documentation source:** https://www.metabase.com/docs/latest/ and the `docs/` directory of https://github.com/metabase/metabase
+- **Docs snapshot:** 2026-09-10, latest Metabase **63.17** (`v0.63.17` / `v1.63.17`)
+
+## This skill packaging (MIT)
+
+`SKILL.md`, `scripts/`, `graph/concepts.json`, `references/`, `install.sh`, `README.md`, and `CREDITS.md` are original packaging for Agent Skills. Copyright © 2026 Ishan Sarkar. Licensed under MIT (see `LICENSE`).
 
 ## Metabase documentation snapshot (`source/`)
 

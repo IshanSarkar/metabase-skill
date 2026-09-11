@@ -2,8 +2,8 @@
 """Recall-first Metabase docs lookup. Run; do not read this file into context.
 
 Usage:
-  python3 lookup.py "each customer should only see their own orders"
-  python3 lookup.py --rebuild "embed a chart without login"
+  python3 scripts/lookup.py "each customer should only see their own orders"
+  py -3 scripts/lookup.py "embed a chart without login"   # Windows
 """
 from __future__ import annotations
 
