@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "metabase-skill"
+version = "1.0.0"
+description = "Agent Skill that answers Metabase questions from a local copy of the official docs."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+authors = [{ name = "Ishan Sarkar" }]
+keywords = ["metabase", "agent-skill", "cursor", "claude"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Documentation",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/IshanSarkar/metabase-skill"
+Repository = "https://github.com/IshanSarkar/metabase-skill"
+Issues = "https://github.com/IshanSarkar/metabase-skill/issues"
+Documentation = "https://www.metabase.com/docs/latest/"
+
+[project.scripts]
+metabase-skill = "metabase_skill:main"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src",
+  "/source",
+  "/references",
+  "/scripts",
+  "/graph/concepts.json",
+  "/SKILL.md",
+  "/CREDITS.md",
+  "/NOTICE.md",
+  "/LICENSE",
+  "/README.md",
+  "/install.sh",
+  "/tests",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/metabase_skill"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"source" = "metabase_skill/payload/source"
+"references" = "metabase_skill/payload/references"
+"scripts" = "metabase_skill/payload/scripts"
+"graph/concepts.json" = "metabase_skill/payload/graph/concepts.json"
+"SKILL.md" = "metabase_skill/payload/SKILL.md"
+"CREDITS.md" = "metabase_skill/payload/CREDITS.md"
+"NOTICE.md" = "metabase_skill/payload/NOTICE.md"
+"LICENSE" = "metabase_skill/payload/LICENSE"
+"README.md" = "metabase_skill/payload/README.md"
+"install.sh" = "metabase_skill/payload/install.sh"

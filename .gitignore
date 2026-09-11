@@ -3,3 +3,7 @@ __pycache__/
 *.pyc
 .venv/
 graph/index.json
+dist/
+build/
+*.egg-info/
+

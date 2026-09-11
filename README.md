@@ -16,7 +16,18 @@ SQL dropdown that lists product categories.
 
 ## Install (pick one)
 
-### No Node.js — Python installer
+### pip (no Node.js)
+
+```bash
+pip install "git+https://github.com/IshanSarkar/metabase-skill.git"
+metabase-skill
+```
+
+After the package is on PyPI, that becomes `pip install metabase-skill` then `metabase-skill`. Same flags as the Python installer (`--project`, `--agent cursor`). `python -m metabase_skill` is equivalent.
+
+Windows: `py -m pip install ...` then `metabase-skill` (or `py -m metabase_skill`).
+
+### Clone + Python installer
 
 Needs [Python 3.9+](https://www.python.org/downloads/) and git. Same idea on every OS.
 
@@ -78,6 +89,7 @@ Then start a **new** Agent chat.
 ## Requirements
 
 - **Python 3.9+** for lookup (standard library only: `pathlib`, `json`, `re`)
+- Optional: **pip** if you install with `pip install ...` (then run `metabase-skill`)
 - Optional: **git** if `source/` is missing (first lookup clones Metabase `docs/`)
 - Optional: **Node.js** only if you install via `npx skills add`
 

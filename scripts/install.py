@@ -17,7 +17,21 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HOME = Path.home()
-IGNORE = shutil.ignore_patterns(".git", ".git/*", "__pycache__", "*.pyc", ".DS_Store", "graph/index.json")
+IGNORE = shutil.ignore_patterns(
+    ".git",
+    ".git/*",
+    "__pycache__",
+    "*.pyc",
+    ".DS_Store",
+    "graph/index.json",
+    ".github",
+    "src",
+    "tests",
+    "dist",
+    "build",
+    "*.egg-info",
+    "pyproject.toml",
+)
 
 AGENT_DIRS = {
     "cursor": [HOME / ".cursor" / "skills" / "metabase", HOME / ".agents" / "skills" / "metabase"],

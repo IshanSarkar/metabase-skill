@@ -12,7 +12,7 @@ See [CREDITS.md](CREDITS.md) for documentation source and authorship.
 
 ## This skill packaging (MIT)
 
-`SKILL.md`, `scripts/`, `graph/concepts.json`, `references/`, `install.sh`, `README.md`, and `CREDITS.md` are original packaging for Agent Skills. Copyright © 2026 Ishan Sarkar. Licensed under MIT (see `LICENSE`).
+`SKILL.md`, `scripts/`, `graph/concepts.json`, `references/`, `install.sh`, `README.md`, `CREDITS.md`, and `src/metabase_skill/` are original packaging for Agent Skills. Copyright © 2026 Ishan Sarkar. Licensed under MIT (see `LICENSE`).
 
 ## Metabase documentation snapshot (`source/`)
 
