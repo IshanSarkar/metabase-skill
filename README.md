@@ -16,7 +16,31 @@ SQL dropdown that lists product categories.
 
 ## Install (pick one)
 
-### Anyone, any OS, any agent — Skills CLI
+### No Node.js — Python installer
+
+Needs [Python 3.9+](https://www.python.org/downloads/) and git. Same idea on every OS.
+
+macOS / Linux:
+
+```bash
+git clone https://github.com/IshanSarkar/metabase-skill.git
+cd metabase-skill
+python3 scripts/install.py
+```
+
+Windows (PowerShell or cmd):
+
+```powershell
+git clone https://github.com/IshanSarkar/metabase-skill.git
+cd metabase-skill
+py -3 scripts\install.py
+```
+
+If you already have the folder, skip clone and run the installer from inside it. Flags: `--project` (current repo only), `--agent cursor` (one product). Unix shortcut: `./install.sh` (calls the same Python installer).
+
+No git: download the [ZIP](https://github.com/IshanSarkar/metabase-skill/archive/refs/heads/main.zip), unzip, then run the same `python3` / `py -3` command from that folder.
+
+### Skills CLI (needs Node.js)
 
 Needs [Node.js](https://nodejs.org/). Same command on macOS, Linux, and Windows:
 
@@ -31,22 +55,6 @@ From a local clone:
 ```bash
 npx skills add . -g -y
 ```
-
-### Python installer (no Node)
-
-Needs Python 3.9+. Same on every OS:
-
-```bash
-# macOS / Linux
-python3 scripts/install.py
-
-# Windows (PowerShell or cmd)
-py -3 scripts\install.py
-```
-
-Flags: `--project` (current repo only), `--agent cursor` (one product).
-
-Unix shortcut: `./install.sh` (calls the same Python installer).
 
 ### Cursor only — clone into the skills folder
 
@@ -103,6 +111,7 @@ install.sh               # Unix wrapper around scripts/install.py
 See [CREDITS.md](CREDITS.md).
 
 - **Documentation source:** [Metabase documentation](https://www.metabase.com/docs/latest/) and the `docs/` folder of [metabase/metabase](https://github.com/metabase/metabase)
+- **Documentation copyright:** © Metabase, Inc.
 - **Docs snapshot:** 2026-09-10; latest Metabase at that time: **63.17** (`v0.63.17` OSS, `v1.63.17` Pro/Enterprise)
 - **Author:** Ishan Sarkar
 - **Implementation:** Cursor AI agent
@@ -112,4 +121,4 @@ This skill is not affiliated with or endorsed by Metabase, Inc.
 ## License
 
 Skill packaging: MIT (`LICENSE`), Copyright © 2026 Ishan Sarkar.  
-`source/` is Metabase documentation (AGPL); see `NOTICE.md`.
+`source/` is Metabase documentation, copyright © Metabase, Inc. (AGPL); see `NOTICE.md`.

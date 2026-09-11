@@ -16,12 +16,13 @@ metadata:
   author: Ishan Sarkar
   implemented_by: Cursor AI agent
   docs_source: https://www.metabase.com/docs/latest/
+  docs_copyright: Metabase, Inc.
 ---
 
 # Metabase Knowledge Base
 
 This skill's root is the directory that contains this `SKILL.md` file.
-Docs referred from: https://www.metabase.com/docs/latest/ (snapshot in `source/`, Metabase 63.17 as of 2026-09-10).
+Docs referred from: https://www.metabase.com/docs/latest/ (snapshot in `source/`, Metabase 63.17 as of 2026-09-10). Documentation copyright: Metabase, Inc.
 Authorship: [CREDITS.md](CREDITS.md) — Ishan Sarkar; Cursor AI agent.
 
 ## Mandatory retrieval (do not skip)

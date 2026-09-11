@@ -7,6 +7,7 @@ See [CREDITS.md](CREDITS.md) for documentation source and authorship.
 - **Author:** Ishan Sarkar
 - **Implementation:** Cursor AI agent
 - **Documentation source:** https://www.metabase.com/docs/latest/ and the `docs/` directory of https://github.com/metabase/metabase
+- **Documentation copyright:** © Metabase, Inc.
 - **Docs snapshot:** 2026-09-10, latest Metabase **63.17** (`v0.63.17` / `v1.63.17`)
 
 ## This skill packaging (MIT)
@@ -15,7 +16,7 @@ See [CREDITS.md](CREDITS.md) for documentation source and authorship.
 
 ## Metabase documentation snapshot (`source/`)
 
-Files under `source/` are a verbatim snapshot of the `docs/` directory from [metabase/metabase](https://github.com/metabase/metabase), © Metabase, Inc. and contributors.
+Files under `source/` are a verbatim snapshot of the `docs/` directory from [metabase/metabase](https://github.com/metabase/metabase). **Copyright © Metabase, Inc.** This skill’s author does not own that copyright.
 
 That tree is licensed under the GNU Affero General Public License v3.0 as described in Metabase's `LICENSE.txt` (non-enterprise paths). See:
 

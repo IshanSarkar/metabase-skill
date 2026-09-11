@@ -8,8 +8,9 @@ This skill’s knowledge base is built from official Metabase documentation.
 - Source files snapshotted into `source/`: the `docs/` tree of https://github.com/metabase/metabase
 - Snapshot date: 2026-09-10
 - Latest Metabase at snapshot: **63.17** (open source `v0.63.17`, Pro/Enterprise `v1.63.17`) — [release](https://github.com/metabase/metabase/releases/tag/v0.63.17)
+- Documentation copyright: **© Metabase, Inc.** The docs in `source/` are not copyrighted by this skill’s author.
 
-Answers should cite those official URLs. This skill is not affiliated with or endorsed by Metabase, Inc. Metabase docs remain © Metabase, Inc. and contributors (AGPL for non-enterprise paths). Details: [NOTICE.md](NOTICE.md).
+Answers should cite those official URLs. This skill is not affiliated with or endorsed by Metabase, Inc. Non-enterprise paths are licensed AGPL; see [NOTICE.md](NOTICE.md).
 
 ## Authorship
 
